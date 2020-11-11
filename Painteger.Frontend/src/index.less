@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 50px;
+
+  &__logo {
+    height: 40px;
+
+    &-image {
+      height: 40px;
+    }
+  }
+
+  &__nav {
+    flex: 1;
+
+    &-link {
+      margin-left: 54px;
+      font-size: 18px;
+      font-weight: 500;
+      color: #18A0FB;
+      text-decoration: none;
+    }
+  }
+}
+
+.button {
+  padding: 10px 44px;
+  background-color: #18A0FB;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &_login {
+    margin-right: 12px;
+    background-color: #fff;
+    color: #18A0FB;
+    border: #18A0FB 1px solid;
+  }
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 100px;
+  background: url('./images/hero.png') no-repeat;
+  background-size: cover;
+
+  &__title {
+    margin-bottom: 40px;
+    width: 390px;
+    font-size: 32px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #fff;
+  }
+}
+
+.form {
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 40px 64px;
+
+  &__wrapper {
+    display: grid;
+    max-width: 88%;
+    grid-template-columns: 40% 10% 25% 25%;
+    gap: 15px;
+  }
+
+  &__title {
+    grid-area: 1 e("/") 1 e("/") 2 e("/") 4;
+    font-size: 18px;
+  }
+
+  &__first-name {
+    grid-area: 2 e("/") 1 e("/") 3 e("/") 3;
+  }
+
+  &__last-name {
+    grid-area: 2 e("/") 3 e("/") 3 e("/") 5;
+  }
+
+  &__email {
+    grid-area: 3 e("/") 1 e("/") 4 e("/") 5;
+  }
+
+  &__password {
+    grid-area: 4 e("/") 1 e("/") 5 e("/") 5;
+  }
+
+  &__submit {
+    grid-area: 5 e("/") 1 e("/") 6 e("/") 3;
+    max-width: 80%;
+    font-size: 14px;
+  }
+
+  &__link {
+    grid-area: 5 e("/") 2 e("/") 6 e("/") 5;
+    margin-left: 5px;
+    align-self: center;
+    font-size: 12px;
+    color: #18A0FB;
+  }
+
+  &__input {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(0, 0, 0, 0.5);;
+  }
+}
