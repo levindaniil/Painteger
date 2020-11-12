@@ -1,0 +1,46 @@
+.card {
+  width: 25%;
+  margin-right: 15px;
+  border: 1px solid #18A0FB;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+
+  &__img {
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+  }
+
+  &__icon {
+    padding: 20px 20px 10px;
+  }
+
+  &__title {
+    margin: 10px auto;
+    width: 80%;
+    font-weight: 400;
+    font-size: 16px;
+
+    &_area {
+      color: rgba(0, 0, 0, 0.63);
+    }
+  }
+
+  &:hover,
+  &:focus {
+    background-color: #18A0FB;
+    color: #ffffff;
+  }
+
+  &_area {
+    margin-right: 0;
+    border: none;
+    background: rgba(196, 196, 196, 0.47);
+
+    &:hover,
+    &:focus {
+      background: rgba(196, 196, 196, 0.47);
+      color: #000;
+    }
+  }
+}

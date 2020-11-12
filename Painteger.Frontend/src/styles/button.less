@@ -7,11 +7,35 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
+  text-decoration: none;
 
   &_login {
     margin-right: 12px;
     background-color: #fff;
     color: #18A0FB;
     border: #18A0FB 1px solid;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: #000;
+    color: #fff;
+    border: none;
+  }
+
+  &_disabled {
+    background-color: #8dd0fd;
+    margin-top: 10px;
+    cursor: default;
+
+    &:hover,
+    &:focus {
+      background-color: #8dd0fd;
+    }
+  }
+
+  &_hero {
+    padding: 12px 54px;
+    font-size: 18px;
   }
 }

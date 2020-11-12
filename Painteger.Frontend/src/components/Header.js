@@ -1,4 +1,5 @@
 import React from 'react';
+import {NavLink} from 'react-router-dom';
 import logo from '../images/painteger.svg';
 
 function Header(props) {
@@ -8,8 +9,16 @@ function Header(props) {
                 <img className='header__logo-image' src={logo} alt="painteger logo"/>
             </a>
             <nav className='header__nav'>
-                <a href="/create-an-art" className='header__nav-link'>Create an art</a>
-                <a href="#" className='header__nav-link'>Subscription</a>
+                <NavLink to="/create-an-art" className='header__nav-link'
+                         activeStyle={{
+                             color: '#18A0FB',
+                             borderBottom: '3px solid #18A0FB'
+                         }}>
+                    Create an art
+                </NavLink>
+                <NavLink to="#" className='header__nav-link'>
+                    Subscription
+                </NavLink>
             </nav>
             <div className='header__buttons'>
                 <button className='button button_login'>Log in</button>

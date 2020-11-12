@@ -1,16 +1,17 @@
 import React from 'react';
 
-function Card({id, img, title, info, alt}) {
+function Card({img, title, alt}) {
     return (
         <div className='card'>
-            <img className='card__img' src={img} alt={alt}/>
-            <div className="card__wrapper">
-                <div className="card__header">
-                    <div className="card__number">{id}.</div>
-                    <h3 className='card__title'>{title}</h3>
-                </div>
-                <p className="card__info">{info}</p>
+            <div className='card__img' style={{
+                width: '100%',
+                height: '150px',
+                background: `url(${img}) no-repeat`,
+                backgroundSize: 'cover'
+            }}>
+
             </div>
+            <h3 className='card__title'>{title}</h3>
         </div>
     );
 }

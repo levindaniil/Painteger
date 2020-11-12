@@ -1,33 +1,27 @@
 import React from 'react';
-import Card from './Card';
-import card1 from '../images/card1.png';
-import card2 from '../images/card2.png';
-import card3 from '../images/card3.png';
+import Step from './Step';
 import feature1 from '../images/feature1.svg';
 import feature2 from '../images/feature2.svg';
 import Feature from "./Feature";
 
-const cards = [
+const steps = [
     {
         id: 1,
-        img: card1,
+        img: 'card1',
         title: 'Upload image',
-        info: 'Choose and upload the picture that you wish to paint',
-        alt: 'picture before stylization'
+        info: 'Choose and upload the picture that you wish to paint'
     },
     {
         id: 2,
-        img: card2,
+        img: 'card2',
         title: 'Choose style',
-        info: 'Choose an artist in whose style you’d like to see your picture',
-        alt: 'style for the picture'
+        info: 'Choose an artist in whose style you’d like to see your picture'
     },
     {
         id: 3,
-        img: card3,
+        img: 'card3',
         title: 'Submit and wait',
-        info: 'Wait for your freshly painted art to be ready',
-        alt: 'stylized picture'
+        info: 'Wait for your freshly painted art to be ready'
     }
 ];
 
@@ -50,19 +44,19 @@ const features = [
 
 function Description(props) {
     return (
-        <section className='description'>
+        <section className='container'>
             <h2 className='title'>Make your photo look like famous artists’ painting</h2>
-            <section className="cards">
-                {cards.map((card, index) => {
-                    return <Card key={index} {...card}/>
+            <section className="steps">
+                {steps.map((step, index) => {
+                    return <Step key={index} {...step}/>
                 })}
             </section>
             <section className="extra">
                 <span className='deco'>or</span>
-                <div className='card card_single'>
-                    <div className="card__wrapper">
-                        <h3 className='card__title card__title_single'>Upload your style</h3>
-                        <p className='card__info'>You can upload any image in which style you want to paint your
+                <div className='step step_single'>
+                    <div className="step__wrapper">
+                        <h3 className='step__title step__title_single'>Upload your style</h3>
+                        <p className='step__info'>You can upload any image in which style you want to paint your
                             picture</p>
                     </div>
                 </div>
