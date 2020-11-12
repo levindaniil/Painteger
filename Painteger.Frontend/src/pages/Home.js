@@ -4,7 +4,7 @@ import Main from '../components/Main';
 function Home(props) {
     return (
         <React.Fragment>
-            <Main />
+            <Main/>
         </React.Fragment>
     );
 }
