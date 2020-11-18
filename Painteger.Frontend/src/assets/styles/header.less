@@ -1,0 +1,87 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  padding: 0.7em 3.125em;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+  width: 100%;
+  background-color: #ffffff;
+
+  &__logo {
+    height: 2.5em;
+
+    &-image {
+      height: 2.5em;
+    }
+  }
+
+  &__nav {
+    flex: 1;
+
+    &-link {
+      margin-left: 3.375em;
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: #18A0FB;
+      text-decoration: none;
+
+      &:hover,
+      &:focus {
+        outline: none;
+        color: #000;
+        border-bottom: 3px solid #000;
+      }
+    }
+  }
+
+  &__buttons {
+    display: none;
+  }
+}
+
+.profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+
+  &__icon {
+    width: 2em;
+    height: 2em;
+  }
+
+  &__name {
+    margin: 0 0.4em;
+    font-weight: 500;
+    color: #18A0FB;
+    //border-bottom: 3px solid #18A0FB;
+  }
+
+  .arrow-icon {
+    width: 0.8em;
+    height: 0.8em;
+  }
+}
+
+.profile-menu {
+  position: absolute;
+  top: 3.9em;
+  right: 3.5em;
+  padding: 1.4em 2.5em 0.9em 1.4em;
+  background: #FFFFFF;
+  border: 1px solid #18A0FB;
+  box-shadow: 0 0 7px rgba(0, 0, 0, 0.17);
+  border-radius: 6px;
+
+  &__link {
+    display: block;
+    margin-bottom: 0.5em;
+    font-size: 1rem;
+    color: #18A0FB;
+    text-decoration: none;
+  }
+}

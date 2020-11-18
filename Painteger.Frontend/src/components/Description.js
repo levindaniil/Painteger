@@ -1,7 +1,7 @@
 import React from 'react';
 import Step from './Step';
-import feature1 from '../images/feature1.svg';
-import feature2 from '../images/feature2.svg';
+import feature1 from '../assets/icons/feature1.svg';
+import feature2 from '../assets/icons/feature2.svg';
 import Feature from "./Feature";
 
 const steps = [

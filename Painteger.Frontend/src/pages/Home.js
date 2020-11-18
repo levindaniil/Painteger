@@ -1,10 +1,12 @@
 import React from 'react';
-import Main from '../components/Main';
+import Hero from "../components/Hero";
+import Description from "../components/Description";
 
 function Home(props) {
     return (
         <React.Fragment>
-            <Main/>
+            <Hero/>
+            <Description/>
         </React.Fragment>
     );
 }

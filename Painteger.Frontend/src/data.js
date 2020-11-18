@@ -1,6 +1,6 @@
-import style1 from './images/claude-monet.jpg'
-import style2 from './images/vah-gogh.jpg'
-import style3 from './images/pablo-picasso-cubism.jpg'
+import style1 from './assets/images/claude-monet.jpg'
+import style2 from './assets/images/vah-gogh.jpg'
+import style3 from './assets/images/pablo-picasso-cubism.jpg'
 
 export let styles = [
     {
