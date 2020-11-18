@@ -42,13 +42,16 @@ function Header(props) {
             <div className='profile-menu'>
                 <ul className="profile-menu__list">
                     <li className="profile-menu__item">
-                        <a className='profile-menu__link' href='/gallery'>My art</a>
+                        <NavLink to="/gallery" className='profile-menu__link'
+                                 activeStyle={activeStyle}>
+                            My art
+                        </NavLink>
                     </li>
                     <li className="profile-menu__item">
-                        <a className='profile-menu__link' href='#'>Subscription</a>
+                        <NavLink to="#" className='profile-menu__link'>Subscription</NavLink>
                     </li>
                     <li className="profile-menu__item">
-                        <a className='profile-menu__link' href='/'>Log out</a>
+                        <NavLink to="/" className='profile-menu__link'>Log out</NavLink>
                     </li>
                 </ul>
             </div>

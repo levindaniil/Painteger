@@ -512,6 +512,7 @@ li {
 }
 .profile-menu__link {
   display: block;
+  width: max-content;
   margin-bottom: 0.5em;
   font-size: 1rem;
   color: #18A0FB;
