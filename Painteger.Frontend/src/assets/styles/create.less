@@ -1,15 +1,39 @@
 .area {
-  margin-bottom: 10px;
-  padding: 50px;
+  margin-bottom: .625em;
+  padding: 3.125em;
   width: 100%;
-  background: rgba(196, 196, 196, 0.47);
-  border-radius: 6px;
+  background: #e3e3e3;
+  border-radius: .375em;
   text-align: center;
-  color: rgba(0, 0, 0, 0.63);
+  color: #545454;
   cursor: pointer;
 
   &_result {
     width: 75%;
-    padding: 100px;
+    padding: 6.25em;
+  }
+}
+
+@media (max-width: 1114px) {
+  .area {
+    &_result {
+      width: 67%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .area {
+    &_result {
+      width: 100%;
+    }
+  }
+}
+
+@media (max-width: 554px) {
+  .area {
+    &_result {
+      padding: 6.25em 3.25em;
+    }
   }
 }

@@ -11,7 +11,7 @@ function Footer(props) {
                 <a href="#" className='footer__nav-link footer__nav-link_first'>Community</a>
                 <a href="#" className='footer__nav-link'>Contact</a>
             </nav>
-            <span className='footer__info'>© Painteger, 2020. Create your own art</span>
+            <p className='footer__info'>© Painteger, 2020. Create your own art</p>
         </footer>
     );
 }

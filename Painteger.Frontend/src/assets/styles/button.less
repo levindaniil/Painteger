@@ -1,19 +1,23 @@
 .button {
-  padding: 10px 44px;
+  padding: .714em 3.143em;
   background-color: #18A0FB;
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.885rem;
+  font-size: .875rem;
   color: #fff;
   border: none;
-  border-radius: 6px;
+  border-radius: .429em;
   cursor: pointer;
   text-decoration: none;
 
+  &_icon {
+    width: 2.5em;
+  }
+
   &_login {
-    margin-right: 12px;
+    margin-right: .857em;
     background-color: #fff;
     color: #18A0FB;
-    border: #18A0FB 1px solid;
+    border: #18A0FB 0.07em solid;
   }
 
   &:hover,
@@ -25,7 +29,7 @@
 
   &_disabled {
     background-color: #8dd0fd;
-    margin-top: 10px;
+    margin-top: .714em;
     cursor: default;
 
     &:hover,
@@ -35,7 +39,56 @@
   }
 
   &_hero {
-    padding: 12px 54px;
+    padding: .667em 3em;
     font-size: 1.125rem;
+  }
+
+  &_toggle {
+    display: none;
+    padding: .5em;
+    background-color: #fff;
+
+    &:hover,
+    &:focus {
+      background-color: #fff;
+    }
+  }
+}
+
+@media (max-width: 1044px) {
+  .button {
+    &_header {
+      font-size: .775rem;
+    }
+  }
+}
+
+@media (max-width: 862px) {
+  .button {
+    &_hero {
+      font-size: 0.875rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .button {
+    &_disabled {
+      margin-left: .714em;
+      margin-top: 0;
+    }
+  }
+}
+
+@media (max-width: 436px) {
+  .button {
+    &_create {
+      padding: .714em 2.75em;
+    }
+
+    &_disabled {
+      margin-left: 0;
+      margin-top: .714em;
+    }
   }
 }

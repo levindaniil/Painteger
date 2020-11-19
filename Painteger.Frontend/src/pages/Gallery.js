@@ -16,7 +16,7 @@ function Gallery(props) {
             </NavLink>
             <h1 className='title'>My art</h1>
             <p className='comment'>Here’s a gallery of your art:</p>
-            <Cards/>
+            <Cards action={'New art'}/>
         </div>
     );
 }

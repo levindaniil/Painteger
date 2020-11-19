@@ -1,0 +1,52 @@
+.profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+
+  &__icon {
+    width: 2em;
+    height: 2em;
+  }
+
+  &__name {
+    margin: 0 .4em;
+    font-weight: 500;
+    color: #18A0FB;
+    //border-bottom: .19em solid #18A0FB;
+  }
+
+  .arrow-icon {
+    width: .8em;
+    height: .8em;
+  }
+
+  &-menu {
+    position: absolute;
+    top: 3.9em;
+    right: 3.5em;
+    padding: 1.4em 4em .9em 1.4em;
+    background: #FFFFFF;
+    border: .063em solid #18A0FB;
+    box-shadow: 0 0 .45em rgba(0, 0, 0, 0.17);
+    border-radius: .375em;
+
+    &__link {
+      display: block;
+      width: max-content;
+      margin-bottom: .5em;
+      font-size: 1rem;
+      color: #18A0FB;
+      text-decoration: none;
+
+      &:hover,
+      &:focus {
+        outline: none;
+        color: #000;
+        border-bottom: .19em solid #000;
+      }
+    }
+  }
+}

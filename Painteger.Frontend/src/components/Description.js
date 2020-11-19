@@ -14,8 +14,8 @@ const steps = [
     {
         id: 2,
         img: 'card2',
-        title: 'Choose style',
-        info: 'Choose an artist in whose style you’d like to see your picture'
+        title: 'Choose style or upload your own',
+        info: 'Choose an artist in whose style you’d like to see your picture or upload your own style'
     },
     {
         id: 3,
@@ -51,16 +51,16 @@ function Description(props) {
                     return <Step key={index} {...step}/>
                 })}
             </section>
-            <section className="extra">
-                <span className='deco'>or</span>
-                <div className='step step_single'>
-                    <div className="step__wrapper">
-                        <h3 className='step__title step__title_single'>Upload your style</h3>
-                        <p className='step__info'>You can upload any image in which style you want to paint your
-                            picture</p>
-                    </div>
-                </div>
-            </section>
+            {/*<section className="extra">*/}
+            {/*    <span className='deco'>or</span>*/}
+            {/*    <div className='step step_single'>*/}
+            {/*        <div className="step__wrapper">*/}
+            {/*            <h3 className='step__title step__title_single'>Upload your style</h3>*/}
+            {/*            <p className='step__info'>You can upload any image in which style you want to paint your*/}
+            {/*                picture</p>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</section>*/}
             <section className='features'>
                 {features.map(feature => {
                     return <Feature key={feature.id} {...feature}/>

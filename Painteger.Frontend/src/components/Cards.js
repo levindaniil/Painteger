@@ -11,7 +11,7 @@ function Cards(props) {
             })}
             <div className='card card_area'>
                 <img className='card__icon' src={add} alt="plus in a circle"/>
-                <h3 className='card__title card__title_area'>Choose style</h3>
+                <h3 className='card__title card__title_area'>{props.action}</h3>
             </div>
         </div>
     );
