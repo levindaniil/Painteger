@@ -1,28 +1,32 @@
 .card {
   width: 25%;
-  margin-right: 15px;
-  border: 1px solid #18A0FB;
-  border-radius: 6px;
+  margin-right: .938em;
+  border: .063em solid #18A0FB;
+  border-radius: .375em;
   text-align: center;
   cursor: pointer;
 
   &__img {
-    border-top-right-radius: 6px;
-    border-top-left-radius: 6px;
+    border-top-right-radius: .375em;
+    border-top-left-radius: .375em;
   }
 
   &__icon {
-    padding: 20px 20px 10px;
+    display: inline-block;
+    padding: 1.25em 1.25em .625em;
+    margin: auto;
+    width: 9em;
   }
 
   &__title {
-    margin: 10px auto;
+    margin: .625em auto;
     width: 80%;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 1rem;
 
     &_area {
-      color: rgba(0, 0, 0, 0.63);
+      margin: 0 auto 1.75em;
+      color: #545454;
     }
   }
 
@@ -33,14 +37,39 @@
   }
 
   &_area {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin-right: 0;
     border: none;
-    background: rgba(196, 196, 196, 0.47);
+    background: #e3e3e3;
 
     &:hover,
     &:focus {
-      background: rgba(196, 196, 196, 0.47);
+      background: #e3e3e3;
       color: #000;
+    }
+  }
+}
+
+@media (max-width: 921px) {
+  .card {
+    width: 45%;
+    margin: 0 0 .938em 0;
+
+    &:nth-child(2n+1) {
+      margin-right: .938em;
+    }
+  }
+}
+
+@media (max-width: 435px) {
+  .card {
+    width: 85%;
+    margin: 0 0 .938em 0;
+
+    &:nth-child(2n+1) {
+      margin-right: 0;
     }
   }
 }

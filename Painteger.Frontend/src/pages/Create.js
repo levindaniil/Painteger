@@ -19,7 +19,7 @@ function Create(props) {
             <section className='step step_create'>
                 <div className="step__header step__header_create">
                     <div className="step__number">1.</div>
-                    <h3 className='step__title'>Upload image</h3>
+                    <h3 className='step__title step__title_create'>Upload image</h3>
                 </div>
                 <div className='area'>Click here or drag the image to this box to upload it</div>
                 <button className='button'>Upload</button>
@@ -27,19 +27,19 @@ function Create(props) {
             <section className='step step_create'>
                 <div className="step__header step__header_create">
                     <div className="step__number">2.</div>
-                    <h3 className='step__title'>Choose style</h3>
+                    <h3 className='step__title step__title_create'>Choose style</h3>
                 </div>
-                <Cards/>
+                <Cards action={'Upload style'}/>
             </section>
             <section className='step step_create'>
                 <div className='step__header step__header_create'>
                     <div className="step__number">3.</div>
-                    <h3 className='step__title'>Submit and wait</h3>
+                    <h3 className='step__title step__title_create'>Submit and wait</h3>
                 </div>
-                <div className='step__content'>
+                <div className='step__result'>
                     <div className='step__buttons'>
-                        <button className='button'>Get a picture</button>
-                        <button className='button button_disabled'>Download</button>
+                        <button className='button button_create'>Get a picture</button>
+                        <button className='button button_create button_disabled'>Download</button>
                     </div>
                     <div className='area area_result'>Your art will be displayed here</div>
                 </div>

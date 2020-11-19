@@ -2,16 +2,73 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 100px;
+  padding: 6.25em;
   background: url('./assets/images/hero.png') no-repeat;
   background-size: cover;
 
   &__title {
-    margin-bottom: 40px;
-    width: 390px;
-    font-size: 38px;
+    margin: 0 2em 1.053em 0;
+    max-width: 390px;
+    font-size: 2.375rem;
     font-weight: 400;
     line-height: 1.5;
     color: #fff;
+  }
+}
+
+@media (max-width: 1108px) {
+  .hero {
+    &__title {
+      font-size: 1.875rem;
+    }
+  }
+}
+
+@media (max-width: 945px) {
+  .hero {
+    &__title {
+      font-size: 1.625em;
+    }
+  }
+}
+
+@media (max-width: 862px) {
+  .hero {
+    padding: 4.5em;
+
+    &__title {
+      max-width: 300px;
+    }
+  }
+}
+
+@media (max-width: 698px) {
+  .hero {
+    padding: 3em 4.5em;
+    text-align: center;
+
+    &__wrapper {
+      margin: 0 auto;
+    }
+
+    &__title {
+      font-size: 1.675rem;
+      margin-right: 0;
+    }
+  }
+}
+
+@media (max-width: 462px) {
+  .hero {
+    padding: 3em 2.5em;
+  }
+}
+
+@media (max-width: 420px) {
+  .hero {
+    &__title {
+      max-width: 200px;
+      font-size: 1.125rem;
+    }
   }
 }

@@ -18,7 +18,7 @@ function SignUpForm(props) {
 
             <div className="form__actions">
                 <a className='button form__submit' href='#'>Register</a>
-                <a className='form__link' href='#'>Already have an account? Log in</a>
+                <a className='form__link' href='#'>Have an account? Log in</a>
             </div>
         </form>
     );
