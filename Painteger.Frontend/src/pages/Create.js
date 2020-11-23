@@ -22,7 +22,7 @@ function Create(props) {
                     <h3 className='step__title step__title_create'>Upload image</h3>
                 </div>
                 <div className='area'>Click here or drag the image to this box to upload it</div>
-                <button className='button'>Upload</button>
+                <button className='button button_center'>Upload</button>
             </section>
             <section className='step step_create'>
                 <div className="step__header step__header_create">
