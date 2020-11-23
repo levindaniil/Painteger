@@ -17,8 +17,8 @@ function SignUpForm(props) {
                    placeholder='Create password'/>
 
             <div className="form__actions">
-                <a className='button form__submit' href='#'>Register</a>
-                <a className='form__link' href='#'>Have an account? Log in</a>
+                <button className='button form__submit'>Register</button>
+                <button className='form__link'>Have an account? Log in</button>
             </div>
         </form>
     );

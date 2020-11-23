@@ -599,10 +599,10 @@ template {
   .header__nav-wrapper {
     display: none;
     position: absolute;
-    top: 202%;
+    top: 102%;
     right: 0;
     left: 0;
-    padding: 1.175em 0 0.275em;
+    padding: 1.175em 0;
     background-color: #FFFFFF;
     border-bottom: 0.063em solid #bfbfbf;
   }
@@ -629,6 +629,9 @@ template {
 @media (max-width: 564px) {
   .header {
     padding: 0.2em 1.75em;
+  }
+  .header__nav-wrapper {
+    top: 202%;
   }
   .header__buttons {
     display: none;
@@ -782,7 +785,11 @@ template {
 .form__link {
   margin-left: 1.25em;
   font-size: 0.75em;
+  background: none;
+  border: none;
   color: #18A0FB;
+  text-align: left;
+  text-decoration: underline;
 }
 .form__link:hover,
 .form__link:focus {
