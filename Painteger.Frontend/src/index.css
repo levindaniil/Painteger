@@ -1046,6 +1046,9 @@ template {
   .card:nth-child(2n+1) {
     margin-right: 0;
   }
+  .card_icon {
+    width: 7em;
+  }
 }
 .footer {
   display: flex;
