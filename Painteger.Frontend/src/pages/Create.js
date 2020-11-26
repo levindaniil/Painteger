@@ -87,12 +87,7 @@ function Create(props) {
         formData.append('user', 'hubot');
         fetch(`http://127.0.0.1:5000/loadWithStyle`, {
             method: 'POST',
-            origin: '*',
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-            },
-            mode: 'cors',
-            credentials: 'include',
+            mode: 'no-cors',
             body: formData
         }).then(() => {
             imageIsReady = true;
@@ -103,12 +98,7 @@ function Create(props) {
     const getImage = () => {
         fetch(`http://127.0.0.1:5000/getImage`, {
             method: 'GET',
-            origin: '*',
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-            },
-            mode: 'cors',
-            credentials: 'include'
+            mode: 'no-cors'
         }).then(res => res.blob())
             .then(image => {
                 let url = URL.createObjectURL(image);
