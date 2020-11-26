@@ -91,11 +91,12 @@ function Create(props) {
             body: formData
         }).then(res => res.blob())
             .then(image => {
-                let url = URL.createObjectURL(image);
+                let url = URL.createObjectURL(image).slice(5, -1);
                 document.querySelector('.button_disabled').classList.remove('button_disabled');
                 const result = document.querySelector('.area_result');
                 result.textContent = '';
-                result.style.background = `url(${url})`;
+                result.style.background = `url(${url}) no-repeat`;
+                result.style.backgroundSize = `cover`;
             });
     }
 
