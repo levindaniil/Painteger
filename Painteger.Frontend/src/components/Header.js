@@ -68,8 +68,8 @@ function Header(props) {
                 </button>
             </nav>
             <div className='header__buttons'>
-                <button className='button button_header button_login'>Log in</button>
-                <button className='button button_header'>Register</button>
+                <button className='button button_header button_login' onClick={e => {props.showLogin()}}>Log in</button>
+                <button className='button button_header' onClick={e => {props.showSignup()}}>Sign up</button>
             </div>
             <button className='profile hidden' onClick={switchMenu}>
                 <svg className='profile__icon' viewBox="0 0 45 45">

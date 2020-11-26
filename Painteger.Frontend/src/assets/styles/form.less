@@ -3,9 +3,23 @@
   border-radius: .375em;
   padding: 2.5em;
 
-  &__title {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 0 0 1.1em 0 ;
+  }
+
+  &__title {
+    margin: 0;
     font-size: 1.125rem;
+  }
+
+  &__close {
+    border: none;
+    background-color: transparent;
+    font-size: 3rem;
+    line-height: .4;
   }
 
   &__actions {
@@ -22,7 +36,11 @@
   &__link {
     margin-left: 1.25em;
     font-size: .75em;
+    background: none;
+    border: none;
     color: #18A0FB;
+    text-align: left;
+    text-decoration: underline;
 
     &:hover,
     &:focus {

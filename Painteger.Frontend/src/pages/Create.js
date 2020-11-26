@@ -1,8 +1,105 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {NavLink} from 'react-router-dom';
 import Cards from "../components/Cards";
+import UploadArea from "../components/UploadArea";
 
 function Create(props) {
+    const [selectedFiles, setSelectedFiles] = useState([]);
+    const [errorMessage, setErrorMessage] = useState('');
+    const [unsupportedFiles, setUnsupportedFiles] = useState([]);
+    const fileInputRef = React.createRef();
+    let style = '';
+
+    const validateFile = (file) => {
+        const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+        return validTypes.indexOf(file.type) !== -1;
+    }
+
+    const handleFiles = (files) => {
+        Array.from(files).forEach(file => {
+            if (validateFile(file)) {
+                setSelectedFiles([file]);
+            } else {
+                file['invalid'] = true;
+                setSelectedFiles([file]);
+                setErrorMessage('File type not permitted');
+                setUnsupportedFiles([file]);
+            }
+        })
+    }
+
+    const dragOver = (e) => {
+        e.preventDefault();
+    }
+
+    const dragEnter = (e) => {
+        e.preventDefault();
+    }
+
+    const dragLeave = (e) => {
+        e.preventDefault();
+    }
+
+    const fileDrop = (e) => {
+        e.preventDefault();
+        const files = e.dataTransfer.files;
+        if (files.length) {
+            handleFiles(files);
+        }
+    }
+
+    const fileSize = (size) => {
+        if (size === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+        const i = Math.floor(Math.log(size) / Math.log(k));
+        return parseFloat((size / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    const removeFile = () => {
+        selectedFiles.splice(0, 1);
+        setSelectedFiles([]);
+        if (unsupportedFiles.length) {
+            unsupportedFiles.splice(0, 1);
+            setUnsupportedFiles([]);
+        }
+    }
+
+    const fileInputClicked = () => {
+        fileInputRef.current.click();
+    }
+
+    const filesSelected = () => {
+        if (fileInputRef.current.files.length) {
+            handleFiles(fileInputRef.current.files);
+        }
+    }
+
+    const uploadFiles = () => {
+        if (document.querySelector('.card_checked')) {
+            const card = document.querySelector('.card_checked');
+            style = card.children[0].style.backgroundImage.slice(4, -1).replace(/['"]/g, "");
+        }
+        const formData = new FormData();
+        formData.append('image', selectedFiles[0]);
+        formData.append('style', style)
+        formData.append('user', 'hubot')
+        fetch('http://127.0.0.1:5000/loadImage', {
+            method: 'POST',
+            body: formData
+        })
+            .catch(() => {
+
+            });
+    }
+
+    useEffect(() => {
+        if (document.querySelector('.card_checked')) {
+            const card = document.querySelector('.card_checked');
+            style['url'] = card.children[0].style.backgroundImage;
+        }
+    })
+
     return (
         <div className='container'>
             <NavLink to='/' className='return-link'>
@@ -21,8 +118,12 @@ function Create(props) {
                     <div className="step__number">1.</div>
                     <h3 className='step__title step__title_create'>Upload image</h3>
                 </div>
-                <div className='area'>Click here or drag the image to this box to upload it</div>
-                <button className='button'>Upload</button>
+                <UploadArea
+                    selectedFiles={selectedFiles} errorMessage={errorMessage}
+                    dragOver={dragOver} dragEnter={dragEnter} dragLeave={dragLeave} fileDrop={fileDrop}
+                    fileSize={fileSize} removeFile={removeFile}
+                    fileInputRef={fileInputRef} fileInputClicked={fileInputClicked} filesSelected={filesSelected}
+                />
             </section>
             <section className='step step_create'>
                 <div className="step__header step__header_create">
@@ -37,10 +138,17 @@ function Create(props) {
                     <h3 className='step__title step__title_create'>Submit and wait</h3>
                 </div>
                 <div className='step__result'>
-                    <div className='step__buttons'>
-                        <button className='button button_create'>Get a picture</button>
-                        <button className='button button_create button_disabled'>Download</button>
-                    </div>
+                    {unsupportedFiles.length === 0 && selectedFiles.length ?
+                        <div className='step__buttons'>
+                            <button className='button button_create' onClick={() => uploadFiles()}>Get a picture
+                            </button>
+                            <button className='button button_create button_disabled'>Download</button>
+                        </div> :
+                        <div className='step__buttons'>
+                            <button className='button button_create button_disabled'>Get a picture</button>
+                            <button className='button button_create button_disabled'>Download</button>
+                        </div>
+                    }
                     <div className='area area_result'>Your art will be displayed here</div>
                 </div>
             </section>
