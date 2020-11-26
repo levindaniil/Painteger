@@ -89,24 +89,14 @@ function Create(props) {
             method: 'POST',
             mode: 'no-cors',
             body: formData
-        }).then(() => {
-            imageIsReady = true;
-            getImage();
-        });
-    }
-
-    const getImage = () => {
-        fetch(`http://127.0.0.1:5000/getImage`, {
-            method: 'GET',
-            mode: 'no-cors'
         }).then(res => res.blob())
             .then(image => {
                 let url = URL.createObjectURL(image);
-                document.querySelector('.card_disabled').classList.remove('card_disabled');
+                document.querySelector('.button_disabled').classList.remove('button_disabled');
                 const result = document.querySelector('.area_result');
                 result.textContent = '';
                 result.style.background = `url(${url})`;
-            })
+            });
     }
 
     return (
