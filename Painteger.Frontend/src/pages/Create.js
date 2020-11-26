@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {NavLink} from 'react-router-dom';
 import Cards from "../components/Cards";
 import UploadArea from "../components/UploadArea";
-import http from '../http';
 
 function Create(props) {
     const [selectedFiles, setSelectedFiles] = useState([]);
@@ -84,12 +83,14 @@ function Create(props) {
         }
         const formData = new FormData();
         formData.append('image', selectedFiles[0]);
-        formData.append('style', style)
-        formData.append('user', 'hubot')
-        http.post(formData)
-            .then(() => {
-                imageIsReady = true;
-            });
+        formData.append('style', style);
+        formData.append('user', 'hubot');
+        fetch(`http://127.0.0.1:5000/loadWithStyle`, {
+            method: 'POST',
+            body: formData
+        }).then(() => {
+            imageIsReady = true;
+        });
     }
 
     useEffect(() => {
@@ -100,12 +101,12 @@ function Create(props) {
     })
 
     const getImage = () => {
-        http.get()
-            .then(() => {
-                document.querySelector('.card_disabled').classList.remove('card_disabled');
-            })
+        fetch(`http://127.0.0.1:5000/getImage`, {
+            method: 'GET'
+        }).then(res => res.blob())
             .then(image => {
                 let url = URL.createObjectURL(image);
+                document.querySelector('.card_disabled').classList.remove('card_disabled');
                 const result = document.querySelector('.area_result');
                 result.textContent = '';
                 result.style.background = `url(${url})`;
