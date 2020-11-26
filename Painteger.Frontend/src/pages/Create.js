@@ -87,8 +87,8 @@ function Create(props) {
         formData.append('user', 'hubot');
         fetch(`http://127.0.0.1:5000/loadWithStyle`, {
             method: 'POST',
+            origin: '*',
             headers: {
-                'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'multipart/form-data',
             },
             mode: 'cors',
@@ -103,8 +103,8 @@ function Create(props) {
     const getImage = () => {
         fetch(`http://127.0.0.1:5000/getImage`, {
             method: 'GET',
+            origin: '*',
             headers: {
-                'Access-Control-Allow-Origin': '*',
                 'Content-Type': 'multipart/form-data',
             },
             mode: 'cors',
