@@ -90,6 +90,7 @@ function Create(props) {
             body: formData
         }).then(() => {
             imageIsReady = true;
+            getImage();
         });
     }
 
@@ -153,10 +154,7 @@ function Create(props) {
                 <div className='step__result'>
                     {unsupportedFiles.length === 0 && selectedFiles.length ?
                         <div className='step__buttons'>
-                            <button className='button button_create' onClick={() => {
-                                uploadFiles();
-                                getImage()
-                            }}>Get a picture
+                            <button className='button button_create' onClick={() => {uploadFiles()}}>Get a picture
                             </button>
                             <button className='button button_create button_disabled'>Download
                             </button>
