@@ -87,6 +87,12 @@ function Create(props) {
         formData.append('user', 'hubot');
         fetch(`http://127.0.0.1:5000/loadWithStyle`, {
             method: 'POST',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'multipart/form-data',
+            },
+            mode: 'cors',
+            credentials: 'include',
             body: formData
         }).then(() => {
             imageIsReady = true;
@@ -94,16 +100,15 @@ function Create(props) {
         });
     }
 
-    useEffect(() => {
-        if (document.querySelector('.card_checked')) {
-            const card = document.querySelector('.card_checked');
-            style['url'] = card.children[0].style.backgroundImage;
-        }
-    })
-
     const getImage = () => {
         fetch(`http://127.0.0.1:5000/getImage`, {
-            method: 'GET'
+            method: 'GET',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'multipart/form-data',
+            },
+            mode: 'cors',
+            credentials: 'include'
         }).then(res => res.blob())
             .then(image => {
                 let url = URL.createObjectURL(image);

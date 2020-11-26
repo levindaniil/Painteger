@@ -536,18 +536,14 @@ template {
 @media (max-width: 768px) {
   .button_create {
     margin-bottom: 0;
-  }
-  .button_disabled {
     margin-right: 0.714em;
   }
 }
 @media (max-width: 436px) {
   .button_create {
     padding: 0.714em 2.75em;
-    margin-bottom: 0.714em;
-  }
-  .button_disabled {
     margin-right: 0;
+    margin-bottom: 0.714em;
   }
   .button_center {
     display: block;
