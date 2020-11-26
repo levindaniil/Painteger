@@ -101,8 +101,7 @@ function Create(props) {
 
     const getImage = () => {
         http.get()
-            .then(res => {
-                res.blob();
+            .then(() => {
                 document.querySelector('.card_disabled').classList.remove('card_disabled');
             })
             .then(image => {
@@ -153,10 +152,12 @@ function Create(props) {
                 <div className='step__result'>
                     {unsupportedFiles.length === 0 && selectedFiles.length ?
                         <div className='step__buttons'>
-                            <button className='button button_create' onClick={() => uploadFiles()}>Get a picture
+                            <button className='button button_create' onClick={() => {
+                                uploadFiles();
+                                getImage()
+                            }}>Get a picture
                             </button>
-                            <button className='button button_create button_disabled'
-                                    onClick={() => getImage()}>Download
+                            <button className='button button_create button_disabled'>Download
                             </button>
                         </div> :
                         <div className='step__buttons'>
