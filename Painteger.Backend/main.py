@@ -15,7 +15,7 @@ class HelloWorld(Resource):
         return {"data":"Hello World"}
 
 
-class LoadImage(Resource):
+class LoadWithSample(Resource):
     def post(self):
         parse = reqparse.RequestParser()
         parse.add_argument('image', type=werkzeug.datastructures.FileStorage, location='files')
@@ -28,21 +28,43 @@ class LoadImage(Resource):
         style_file = args['style']
         style_file.save("style.jpg")
 
-        self.run_model()
+        run_model()
 
         path = os.path.abspath(os.getcwd())
         result = '%s/output.jpg' % path
 
         return send_file(result, mimetype='image/jpeg')
 
-    def run_model(self):
-        model = Model()
-        model.run()
-        pass
+
+class LoadWithStyle(Resource):
+    def post(self):
+        parse = reqparse.RequestParser()
+        parse.add_argument('image', type=werkzeug.datastructures.FileStorage, location='files')
+        parse.add_argument('style', type=str)
+        args = parse.parse_args()
+
+        image_file = args['image']
+        image_file.save("content.jpg")
+
+        style = args['style']
+
+        run_model(style)
+
+        path = os.path.abspath(os.getcwd())
+        result = '%s/output.jpg' % path
+
+        return send_file(result, mimetype='image/jpeg')
+
+
+def run_model(link=None):
+    model = Model()
+    model.run(link)
+    pass
 
 
 api.add_resource(HelloWorld, "/hello")
-api.add_resource(LoadImage, "/loadImage")
+api.add_resource(LoadWithSample, "/loadWithSample")
+api.add_resource(LoadWithStyle, "/loadWithStyle")
 
 
 if __name__ == "__main__":
