@@ -89,7 +89,7 @@ function Create(props) {
             method: 'POST',
             origin: '*',
             headers: {
-                'Content-Type': 'multipart/form-data',
+                'Content-Type': 'application/json; charset=utf-8',
             },
             mode: 'cors',
             credentials: 'include',
@@ -105,7 +105,7 @@ function Create(props) {
             method: 'GET',
             origin: '*',
             headers: {
-                'Content-Type': 'multipart/form-data',
+                'Content-Type': 'application/json; charset=utf-8',
             },
             mode: 'cors',
             credentials: 'include'
