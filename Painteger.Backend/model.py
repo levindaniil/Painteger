@@ -24,10 +24,10 @@ import tensorflow_hub as hub
 
 
 class Model:
-    def run(self):
+    def run(self, link=None):
         path = os.path.abspath(os.getcwd())
         content_image_url = 'file:///%s/content.jpg' % path
-        style_image_url = 'file:///%s//style.jpg' % path
+        style_image_url = 'file:///%s//style.jpg' % path if link is None else link
         output_image_size = 512 #any
 
         content_img_size = (output_image_size, output_image_size)
@@ -56,7 +56,10 @@ class Model:
     @functools.lru_cache(maxsize=None)
     def load_image(self,image_url, image_size=(256, 256), preserve_aspect_ratio=True):
 
-        base_path = os.path.abspath(os.getcwd()) + '\\' + os.path.basename(image_url)[-128:]
+        base_path = os.path.basename(image_url)[-128:]
+        if not str.startswith(image_url, 'http'):
+            base_path = os.path.abspath(os.getcwd()) + '\\' + base_path
+
         image_path = tf.keras.utils.get_file(base_path, image_url)
         img = plt.imread(image_path).astype(np.float32)[np.newaxis, ...]
         if img.max() > 1.0:
