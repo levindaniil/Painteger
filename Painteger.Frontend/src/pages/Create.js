@@ -85,19 +85,21 @@ function Create(props) {
         formData.append('image', selectedFiles[0]);
         formData.append('style', style);
         formData.append('user', 'hubot');
-        fetch(`http://127.0.0.1:5000/loadWithStyle`, {
+        const getUrlAsImg = () => fetch(`http://127.0.0.1:5000/loadWithStyle`, {
             method: 'POST',
-            mode: 'no-cors',
-            body: formData
-        }).then(res => res.blob())
-            .then(image => {
-                let url = URL.createObjectURL(image).slice(5, -1);
-                document.querySelector('.button_disabled').classList.remove('button_disabled');
-                const result = document.querySelector('.area_result');
-                result.textContent = '';
-                result.style.background = `url(${url}) no-repeat`;
-                result.style.backgroundSize = `cover`;
-            });
+                mode: 'no-cors',
+                body: formData
+        })
+            .then( r => r.arrayBuffer() )
+            .then( ab => URL.createObjectURL( new Blob( [ ab ], { type: 'image/jpeg' } ) ) )
+            .then( src => { const img = document.createElement( 'img' ); img.src = src; return img; } )
+            .catch( console.error );
+
+        getUrlAsImg().then( img => document.querySelector('.area_result').append(img));
+        document.querySelector('.button_disabled').classList.remove('button_disabled');
+        const result = document.querySelector('.area_result');
+        result.textContent = '';
+        result.style.background = ``;
     }
 
     return (
@@ -140,7 +142,9 @@ function Create(props) {
                 <div className='step__result'>
                     {unsupportedFiles.length === 0 && selectedFiles.length ?
                         <div className='step__buttons'>
-                            <button className='button button_create' onClick={() => {uploadFiles()}}>Get a picture
+                            <button className='button button_create' onClick={() => {
+                                uploadFiles()
+                            }}>Get a picture
                             </button>
                             <button className='button button_create button_disabled'>Download
                             </button>
