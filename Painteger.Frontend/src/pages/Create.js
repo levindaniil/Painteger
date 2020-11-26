@@ -84,7 +84,7 @@ function Create(props) {
         formData.append('image', selectedFiles[0]);
         formData.append('style', style)
         formData.append('user', 'hubot')
-        fetch('http://localhost:3000/create-an-art', {
+        fetch('http://127.0.0.1:5000/loadImage', {
             method: 'POST',
             body: formData
         })
