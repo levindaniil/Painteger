@@ -2,12 +2,14 @@ import React, {useState, useEffect} from 'react';
 import {NavLink} from 'react-router-dom';
 import Cards from "../components/Cards";
 import UploadArea from "../components/UploadArea";
+import http from '../http';
 
 function Create(props) {
     const [selectedFiles, setSelectedFiles] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
     const [unsupportedFiles, setUnsupportedFiles] = useState([]);
     const fileInputRef = React.createRef();
+    let imageIsReady = false;
     let style = '';
 
     const validateFile = (file) => {
@@ -84,12 +86,9 @@ function Create(props) {
         formData.append('image', selectedFiles[0]);
         formData.append('style', style)
         formData.append('user', 'hubot')
-        fetch('http://127.0.0.1:5000/loadImage', {
-            method: 'POST',
-            body: formData
-        })
-            .catch(() => {
-
+        http.post(formData)
+            .then(() => {
+                imageIsReady = true;
             });
     }
 
@@ -99,6 +98,20 @@ function Create(props) {
             style['url'] = card.children[0].style.backgroundImage;
         }
     })
+
+    const getImage = () => {
+        http.get()
+            .then(res => {
+                res.blob();
+                document.querySelector('.card_disabled').classList.remove('card_disabled');
+            })
+            .then(image => {
+                let url = URL.createObjectURL(image);
+                const result = document.querySelector('.area_result');
+                result.textContent = '';
+                result.style.background = `url(${url})`;
+            })
+    }
 
     return (
         <div className='container'>
@@ -142,7 +155,9 @@ function Create(props) {
                         <div className='step__buttons'>
                             <button className='button button_create' onClick={() => uploadFiles()}>Get a picture
                             </button>
-                            <button className='button button_create button_disabled'>Download</button>
+                            <button className='button button_create button_disabled'
+                                    onClick={() => getImage()}>Download
+                            </button>
                         </div> :
                         <div className='step__buttons'>
                             <button className='button button_create button_disabled'>Get a picture</button>
