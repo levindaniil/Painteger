@@ -1,5 +1,7 @@
 .area {
-  margin-bottom: .625em;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
   padding: 3.125em;
   width: 100%;
   background: #e3e3e3;
@@ -8,9 +10,58 @@
   color: #545454;
   cursor: pointer;
 
+  &__icon {
+    height: 3.5em;
+    fill: #a7a7a7;
+  }
+
+  &__text {
+    margin-bottom: 0;
+  }
+
   &_result {
     width: 75%;
     padding: 6.25em;
+  }
+}
+
+.file-status-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.file-name,
+.file-error-message {
+  font-weight: 500;
+}
+
+.file-size,
+.file-error-message {
+  margin-left: .5em;
+}
+
+.file-error-message,
+.file-remove {
+  color: #c31c1c;
+}
+
+.file-remove {
+  display: flex;
+  align-items: center;
+  margin-left: 1.5em;
+  font-weight: 700;
+  cursor: pointer;
+  opacity: .75;
+
+  &-icon {
+    margin-right: .3em;
+    width: 20px;
+  }
+
+  &:hover {
+    opacity: 1;
+    text-decoration: underline;
   }
 }
 
@@ -32,6 +83,8 @@
 
 @media (max-width: 554px) {
   .area {
+    line-height: 1.5;
+
     &_result {
       padding: 6.25em 3.25em;
     }

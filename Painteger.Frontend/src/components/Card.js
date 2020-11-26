@@ -1,19 +1,36 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 
-function Card({img, title}) {
-    return (
-        <div className='card'>
-            <div className='card__img' style={{
-                width: '100%',
-                height: '150px',
-                background: `url(${img}) no-repeat`,
-                backgroundSize: 'cover'
-            }}>
+class Card extends React.Component {
+    componentDidMount() {
+        const cards = document.querySelectorAll('.card');
 
+        cards.forEach(card => {
+            card.addEventListener('click', () => {
+                if (document.querySelector('.card_checked')) {
+                    document.querySelector('.card_checked').classList.remove('card_checked');
+                }
+                card.classList.toggle('card_checked');
+            });
+        });
+    }
+
+    render() {
+        return (
+            <div className='card'>
+                <div className='card__img' style={{
+                    width: '100%',
+                    height: '150px',
+                    backgroundImage: `url(${this.props.img})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'cover'
+                }}> </div>
+                <div className='card__title'>
+                    <h3 className='card__title-text'>{this.props.title}</h3>
+                </div>
             </div>
-            <h3 className='card__title'>{title}</h3>
-        </div>
-    );
+        );
+    }
+
 }
 
 export default Card;

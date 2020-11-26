@@ -9,10 +9,11 @@ function Cards(props) {
             {styles.map(style => {
                 return <Card key={style.id} {...style}/>
             })}
-            <div className='card card_area'>
+            <label className='card card_area'>
+                <input className='card__upload hidden' type='file'/>
                 <img className='card__icon' src={add} alt="plus in a circle"/>
-                <h3 className='card__title card__title_area'>{props.action}</h3>
-            </div>
+                <h3 className='card__title-text card__title-text_area'>{props.action}</h3>
+            </label>
         </div>
     );
 }

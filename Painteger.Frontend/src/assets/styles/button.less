@@ -27,9 +27,12 @@
     border: none;
   }
 
+  &_create {
+    margin-bottom: .714em;
+  }
+
   &_disabled {
     background-color: #8dd0fd;
-    margin-top: .714em;
     cursor: default;
 
     &:hover,
@@ -73,9 +76,12 @@
 
 @media (max-width: 768px) {
   .button {
+    &_create {
+      margin-bottom: 0;
+    }
+
     &_disabled {
-      margin-left: .714em;
-      margin-top: 0;
+      margin-right: .714em;
     }
   }
 }
@@ -84,11 +90,11 @@
   .button {
     &_create {
       padding: .714em 2.75em;
+      margin-bottom: .714em;
     }
 
     &_disabled {
-      margin-left: 0;
-      margin-top: .714em;
+      margin-right: 0;
     }
 
     &_center {

@@ -12,7 +12,7 @@ function Hero(props) {
                 </NavLink>
             </div>
 
-            <SignUpForm />
+            <SignUpForm title='Sign up for a free account' show={true} modal={false}/>
         </section>
     );
 }
