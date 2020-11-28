@@ -5,12 +5,14 @@ class Card extends React.Component {
         const cards = document.querySelectorAll('.card');
 
         cards.forEach(card => {
-            card.addEventListener('click', () => {
+            if (!card.classList.contains('card_area')) {
+               card.addEventListener('click', () => {
                 if (document.querySelector('.card_checked')) {
                     document.querySelector('.card_checked').classList.remove('card_checked');
                 }
                 card.classList.toggle('card_checked');
             });
+            }
         });
     }
 

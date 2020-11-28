@@ -1,14 +1,16 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {NavLink} from 'react-router-dom';
 import Cards from "../components/Cards";
 import UploadArea from "../components/UploadArea";
 
 function Create(props) {
     const [selectedFiles, setSelectedFiles] = useState([]);
+    const [selectedStyle, setSelectedStyle] = useState([]);
     const [errorMessage, setErrorMessage] = useState('');
     const [unsupportedFiles, setUnsupportedFiles] = useState([]);
+    const [unsupportedStyles, setUnsupportedStyles] = useState([]);
     const fileInputRef = React.createRef();
-    let imageIsReady = false;
+    const styleInputRef = React.createRef();
     let style = '';
 
     const validateFile = (file) => {
@@ -25,6 +27,19 @@ function Create(props) {
                 setSelectedFiles([file]);
                 setErrorMessage('File type not permitted');
                 setUnsupportedFiles([file]);
+            }
+        })
+    }
+
+    const handleStyles = (styles) => {
+        Array.from(styles).forEach(style => {
+            if (validateFile(style)) {
+                setSelectedStyle([style]);
+            } else {
+                style['invalid'] = true;
+                setSelectedStyle([style]);
+                setErrorMessage('File type not permitted');
+                setUnsupportedStyles([style]);
             }
         })
     }
@@ -66,6 +81,15 @@ function Create(props) {
         }
     }
 
+    const removeStyle = () => {
+        selectedStyle.splice(0, 1);
+        setSelectedStyle([]);
+        if (unsupportedStyles.length) {
+            unsupportedStyles.splice(0, 1);
+            setUnsupportedStyles([]);
+        }
+    }
+
     const fileInputClicked = () => {
         fileInputRef.current.click();
     }
@@ -76,30 +100,57 @@ function Create(props) {
         }
     }
 
+    const styleInputClicked = () => {
+        if (document.querySelector('.card_checked')) {
+            document.querySelector('.card_checked').classList.remove('card_checked');
+        }
+        styleInputRef.current.click();
+    }
+
+    const styleSelected = () => {
+        if (styleInputRef.current.files.length) {
+            handleStyles(styleInputRef.current.files);
+        }
+    }
+
     const uploadFiles = () => {
+        let path = '';
         if (document.querySelector('.card_checked')) {
             const card = document.querySelector('.card_checked');
             style = card.children[0].style.backgroundImage.slice(4, -1).replace(/['"]/g, "");
+            path = 'loadWithStyle';
+        } else {
+            style = selectedStyle[0];
+            path = 'loadWithSample';
         }
         const formData = new FormData();
         formData.append('image', selectedFiles[0]);
         formData.append('style', style);
         formData.append('user', 'hubot');
-        const getUrlAsImg = () => fetch(`http://127.0.0.1:5000/loadWithStyle`, {
+        fetch(`http://127.0.0.1:5000/${path}`, {
             method: 'POST',
-                mode: 'no-cors',
-                body: formData
+            mode: 'cors',
+            origin: '*',
+            credentials: 'include',
+            body: formData
         })
-            .then( r => r.arrayBuffer() )
-            .then( ab => URL.createObjectURL( new Blob( [ ab ], { type: 'image/jpeg' } ) ) )
-            .then( src => { const img = document.createElement( 'img' ); img.src = src; return img; } )
-            .catch( console.error );
-
-        getUrlAsImg().then( img => document.querySelector('.area_result').append(img));
-        document.querySelector('.button_disabled').classList.remove('button_disabled');
-        const result = document.querySelector('.area_result');
-        result.textContent = '';
-        result.style.background = ``;
+            .then(res => {
+                console.log(res);
+                return new Blob([res], {type: 'image/jpeg'})
+            })
+            .then(blob => {
+                const imageUrl = URL.createObjectURL(blob);
+                const img = new Image();
+                img.classList.add('result-img');
+                const result = document.querySelector('.area_result');
+                result.textContent = '';
+                result.append(img);
+                document.querySelector('.result-img').addEventListener('load', () => URL.revokeObjectURL(imageUrl));
+                document.querySelector('.result-img').src = imageUrl;
+                result.style.background = '';
+                document.querySelector('.button_disabled').classList.remove('button_disabled');
+            })
+            .catch(console.error);
     }
 
     return (
@@ -132,7 +183,10 @@ function Create(props) {
                     <div className="step__number">2.</div>
                     <h3 className='step__title step__title_create'>Choose style</h3>
                 </div>
-                <Cards action={'Upload style'}/>
+                <Cards action={'Upload style'} fileSize={fileSize} removeStyle={removeStyle}
+                       styleInputRef={styleInputRef} selectedStyle={selectedStyle}
+                       errorMessage={errorMessage}
+                       styleInputClicked={styleInputClicked} styleSelected={styleSelected}/>
             </section>
             <section className='step step_create'>
                 <div className='step__header step__header_create'>

@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import send_file
+from flask_cors import CORS, cross_origin
 from flask_restful import Api, Resource, reqparse
 import werkzeug
 from model import Model
@@ -8,8 +9,11 @@ import os
 
 app = Flask(__name__)
 api = Api(app)
+CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 
+@cross_origin()
 class HelloWorld(Resource):
     def get(self):
         return {"data":"Hello World"}
