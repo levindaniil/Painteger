@@ -136,7 +136,7 @@ function Create(props) {
         })
             .then(res => {
                 console.log(res);
-                return new Blob([res], {type: 'image/jpeg'})
+                return res.blob();
             })
             .then(blob => {
                 const imageUrl = URL.createObjectURL(blob);

@@ -13,13 +13,14 @@ CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-@cross_origin()
 class HelloWorld(Resource):
+    @cross_origin()
     def get(self):
         return {"data":"Hello World"}
 
 
 class LoadWithSample(Resource):
+    @cross_origin()
     def post(self):
         parse = reqparse.RequestParser()
         parse.add_argument('image', type=werkzeug.datastructures.FileStorage, location='files')
@@ -37,10 +38,15 @@ class LoadWithSample(Resource):
         path = os.path.abspath(os.getcwd())
         result = '%s/output.jpg' % path
 
-        return send_file(result, mimetype='image/jpeg')
+        response = send_file(result, mimetype='image/jpeg')
+        header = response.headers
+        header['Access-Control-Allow-Credentials'] = 'true'
+
+        return response
 
 
 class LoadWithStyle(Resource):
+    @cross_origin()
     def post(self):
         parse = reqparse.RequestParser()
         parse.add_argument('image', type=werkzeug.datastructures.FileStorage, location='files')
@@ -57,7 +63,11 @@ class LoadWithStyle(Resource):
         path = os.path.abspath(os.getcwd())
         result = '%s/output.jpg' % path
 
-        return send_file(result, mimetype='image/jpeg')
+        response = send_file(result, mimetype='image/jpeg')
+        header = response.headers
+        header['Access-Control-Allow-Credentials'] = 'true'
+
+        return response
 
 
 def run_model(link=None):
