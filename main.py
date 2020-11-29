@@ -7,7 +7,7 @@ from model import Model
 import os
 
 
-app = Flask(__name__, static_folder='Painteger.Frontend/build', static_url_path='')
+app = Flask(__name__, static_folder='Painteger.Frontend/build', static_url_path='/')
 api = Api(app)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -81,7 +81,7 @@ api.add_resource(LoadWithSample, "/loadWithSample")
 api.add_resource(LoadWithStyle, "/loadWithStyle")
 
 
-@app.route('https://painteger.herokuapp.com/')
+@app.route('/')
 def serve():
     return send_from_directory(app.static_folder, 'index.html')
 
