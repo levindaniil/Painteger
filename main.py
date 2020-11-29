@@ -8,7 +8,7 @@ import os
 
 
 app = Flask(__name__
-            , static_folder="./Painteger.Frontend/build", template_folder="./Painteger.Frontend/public"
+            , static_folder="./Painteger.Frontend/build", template_folder="./Painteger.Frontend/build"
             , static_url_path="/")
 api = Api(app)
 CORS(app)
