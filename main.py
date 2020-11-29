@@ -8,15 +8,10 @@ import os
 
 
 app = Flask(__name__
-            , static_folder='./Painteger.Frontend/build', static_url_path='/')
+            , static_folder='Painteger.Frontend/build', static_url_path='/')
 api = Api(app)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
-
-
-@app.route('/')
-def index():
-    return app.send_static_file('index.html')
 
 
 class HelloWorld(Resource):
@@ -94,6 +89,6 @@ def serve(path):
 
 
 if __name__ == "__main__":
-    app.run(debug='true')
+    app.run(debug=True)
 
 
