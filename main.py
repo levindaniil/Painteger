@@ -8,7 +8,7 @@ import os
 
 
 app = Flask(__name__
-            , static_folder='Painteger.Frontend/build', static_url_path='/')
+            , static_folder='build', static_url_path='/')
 api = Api(app)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
