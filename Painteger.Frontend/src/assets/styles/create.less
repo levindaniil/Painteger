@@ -34,6 +34,10 @@
   margin-bottom: 1em;
 }
 
+.file-info {
+  display: flex;
+}
+
 .file-name,
 .file-error-message {
   font-weight: 500;
@@ -81,6 +85,15 @@
     &_result {
       width: 100%;
     }
+  }
+
+  .file-size,
+  .file-error-message {
+    margin: .5em 0 0 0;
+  }
+
+  .file-info {
+    flex-direction: column;
   }
 }
 

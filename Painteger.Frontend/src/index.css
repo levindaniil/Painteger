@@ -989,6 +989,9 @@ template {
   align-items: center;
   margin-bottom: 1em;
 }
+.file-info {
+  display: flex;
+}
 .file-name,
 .file-error-message {
   font-weight: 500;
@@ -1025,6 +1028,13 @@ template {
 @media (max-width: 768px) {
   .area_result {
     width: 100%;
+  }
+  .file-size,
+  .file-error-message {
+    margin: 0.5em 0 0 0;
+  }
+  .file-info {
+    flex-direction: column;
   }
 }
 @media (max-width: 554px) {

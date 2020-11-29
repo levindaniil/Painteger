@@ -25,9 +25,11 @@ function UploadArea(props) {
             {
                 props.selectedFiles.map((data, i) =>
                     <div className="file-status-bar" key={i}>
-                        <span className={`file-name ${data.invalid ? 'file-error' : ''}`}>{data.name}</span>
+                        <div className="file-info">
+                            <span className={`file-name ${data.invalid ? 'file-error' : ''}`}>{data.name}</span>
                         <span className="file-size">({props.fileSize(data.size)})</span>
                         {data.invalid && <span className='file-error-message'>({props.errorMessage})</span>}
+                        </div>
                         <div className="file-remove" onClick={() => props.removeFile(data.name)}>
                             <img className='file-remove-icon' src={remove} alt="remove icon"/>
                             Remove
