@@ -114,6 +114,7 @@ function Create(props) {
     }
 
     const uploadFiles = () => {
+        const download = document.querySelector('.button_download');
         const loader = document.createElement('div');
         loader.classList.add('lds-dual-ring');
         const result = document.querySelector('.area_result');
@@ -147,6 +148,7 @@ function Create(props) {
                 const img = new Image();
                 img.classList.add('result-img');
                 img.src = imageUrl;
+                download.href = imageUrl;
                 result.style.background = 'none';
                 result.style.border = 'none';
                 result.style.padding = '0';
@@ -209,12 +211,14 @@ function Create(props) {
                                 uploadFiles()
                             }}>Get a picture
                             </button>
-                            <button className='button button_create button_disabled'>Download
-                            </button>
+                            <a className='button button_create button_download button_disabled'
+                            download={'stylized'}>Download
+                            </a>
                         </div> :
                         <div className='step__buttons'>
                             <button className='button button_create button_disabled'>Get a picture</button>
-                            <button className='button button_create button_disabled'>Download</button>
+                            <a className='button button_create button_download button_disabled'
+                            download={'stylized'}>Download</a>
                         </div>
                     }
                     <div className='area area_result'>Your art will be displayed here</div>
