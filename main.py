@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask import send_file
 from flask_cors import CORS, cross_origin
 from flask_restful import Api, Resource, reqparse
@@ -8,7 +8,7 @@ import os
 
 
 app = Flask(__name__
-            , static_folder='Painteger.Frontend/build', static_url_path='')
+            , static_folder='./Painteger.Frontend/build', static_url_path='/')
 api = Api(app)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -87,7 +87,13 @@ api.add_resource(LoadWithSample, "/loadWithSample")
 api.add_resource(LoadWithStyle, "/loadWithStyle")
 
 
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    return send_from_directory(app.static_folder, 'index.html')
+
+
 if __name__ == "__main__":
-    app.run()
+    app.run(debug='true')
 
 
