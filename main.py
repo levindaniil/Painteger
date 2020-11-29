@@ -14,6 +14,11 @@ CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
+
+
 class HelloWorld(Resource):
     @cross_origin()
     def get(self):
@@ -82,12 +87,7 @@ api.add_resource(LoadWithSample, "/loadWithSample")
 api.add_resource(LoadWithStyle, "/loadWithStyle")
 
 
-@app.route('/', methods=["GET"])
-def index():
-    return app.send_static_file('index.html')
-
-
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    app.run()
 
 
