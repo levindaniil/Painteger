@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, send_from_directory
 from flask import send_file
 from flask_cors import CORS, cross_origin
 from flask_restful import Api, Resource, reqparse
@@ -11,6 +11,11 @@ app = Flask(__name__, static_folder='./Painteger.Frontend/build', static_url_pat
 api = Api(app)
 CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
+
+
+@app.route('/')
+def serve():
+    return send_from_directory(app.static_folder, 'index.html')
 
 
 class HelloWorld(Resource):
@@ -82,6 +87,6 @@ api.add_resource(LoadWithStyle, "/loadWithStyle")
 
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run(host='0.0.0.0')
 
 
