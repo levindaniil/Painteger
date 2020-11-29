@@ -114,13 +114,19 @@ function Create(props) {
     }
 
     const uploadFiles = () => {
-        let path = '';
+        const loader = document.createElement('div');
+        loader.classList.add('lds-dual-ring');
+        const result = document.querySelector('.area_result');
+        result.textContent = '';
+        result.style.padding = '5em';
+        result.style.border = '1px solid #18A0FB';
+        result.style.background = '#fff';
+        result.append(loader);
+        let path;
+        style = selectedStyle[0];
         if (document.querySelector('.card_checked')) {
-            const card = document.querySelector('.card_checked');
-            style = card.children[0].style.backgroundImage.slice(4, -1).replace(/['"]/g, "");
             path = 'loadWithStyle';
         } else {
-            style = selectedStyle[0];
             path = 'loadWithSample';
         }
         const formData = new FormData();
@@ -134,23 +140,25 @@ function Create(props) {
             credentials: 'include',
             body: formData
         })
-            .then(res => {
-                console.log(res);
-                return res.blob();
-            })
+            .then(res => res.blob())
             .then(blob => {
+                document.querySelector('.lds-dual-ring').remove();
                 const imageUrl = URL.createObjectURL(blob);
                 const img = new Image();
                 img.classList.add('result-img');
-                const result = document.querySelector('.area_result');
-                result.textContent = '';
+                img.src = imageUrl;
+                result.style.background = 'none';
+                result.style.border = 'none';
+                result.style.padding = '0';
                 result.append(img);
-                document.querySelector('.result-img').addEventListener('load', () => URL.revokeObjectURL(imageUrl));
-                document.querySelector('.result-img').src = imageUrl;
-                result.style.background = '';
-                document.querySelector('.button_disabled').classList.remove('button_disabled');
+                if (document.querySelector('.button_disabled')) {
+                    document.querySelector('.button_disabled').classList.remove('button_disabled');
+                }
             })
-            .catch(console.error);
+            .catch(() => {
+                result.textContent = 'Your art will be displayed here';
+                return console.error;
+            });
     }
 
     return (
@@ -185,7 +193,7 @@ function Create(props) {
                 </div>
                 <Cards action={'Upload style'} fileSize={fileSize} removeStyle={removeStyle}
                        styleInputRef={styleInputRef} selectedStyle={selectedStyle}
-                       errorMessage={errorMessage}
+                       errorMessage={errorMessage} setSelectedStyle={setSelectedStyle}
                        styleInputClicked={styleInputClicked} styleSelected={styleSelected}/>
             </section>
             <section className='step step_create'>
@@ -194,7 +202,8 @@ function Create(props) {
                     <h3 className='step__title step__title_create'>Submit and wait</h3>
                 </div>
                 <div className='step__result'>
-                    {unsupportedFiles.length === 0 && selectedFiles.length ?
+                    {unsupportedFiles.length === 0 && selectedFiles.length &&
+                    unsupportedStyles.length === 0 && selectedStyle.length ?
                         <div className='step__buttons'>
                             <button className='button button_create' onClick={() => {
                                 uploadFiles()

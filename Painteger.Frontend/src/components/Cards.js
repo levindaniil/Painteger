@@ -9,7 +9,7 @@ function Cards(props) {
         <React.Fragment>
             <div className='cards'>
                 {styles.map(style => {
-                    return <Card key={style.id} {...style}/>
+                    return <Card key={style.id} {...style} setSelectedStyle={props.setSelectedStyle}/>
                 })}
                 <div className='card card_area' onClick={props.styleInputClicked}>
                     <input className='card__upload hidden' ref={props.styleInputRef} type='file'
@@ -19,7 +19,7 @@ function Cards(props) {
                 </div>
             </div>
             {
-                props.selectedStyle.map((data, i) =>
+                props.selectedStyle.map((data, i) => (typeof data !== 'string') ?
                     <div className="file-status-bar" key={i}>
                         <span className={`file-name ${data.invalid ? 'file-error' : ''}`}>{data.name}</span>
                         <span className="file-size">({props.fileSize(data.size)})</span>
@@ -28,7 +28,7 @@ function Cards(props) {
                             <img className='file-remove-icon' src={remove} alt="remove icon"/>
                             Remove
                         </div>
-                    </div>
+                    </div> : ''
                 )
             }
         </React.Fragment>

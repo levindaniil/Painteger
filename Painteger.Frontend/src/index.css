@@ -978,6 +978,9 @@ template {
   margin-bottom: 0;
 }
 .area_result {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 75%;
   padding: 6.25em;
 }
@@ -1072,7 +1075,6 @@ template {
 .card__img {
   border-top-right-radius: 0.375em;
   border-top-left-radius: 0.375em;
-  object-fit: cover;
 }
 .card__icon {
   display: inline-block;
@@ -1261,58 +1263,34 @@ li {
 .hidden {
   display: none;
 }
-.checkbox-label {
-  display: block;
-}
-.upload-modal {
-  z-index: 999;
-  display: none;
-  overflow: hidden;
-}
-.upload-modal .overlay {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.66);
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.progress-container {
-  background: white;
-  width: 500px;
-  height: 300px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  overflow: hidden;
-}
-.progress-container span {
-  display: flex;
-  justify-content: center;
-  padding-top: 20px;
-  font-size: 20px;
-}
-.progress {
-  width: 90%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #efefef;
-  height: 20px;
-  border-radius: 5px;
-}
-.progress-bar {
-  position: absolute;
-  background-color: #4aa1f3;
-  height: 20px;
-  border-radius: 5px;
-  text-align: center;
-  color: white;
-  font-weight: bold;
-}
 .error {
   color: #c31c1c;
+}
+.result-img {
+  object-fit: contain;
+}
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid;
+  border-color: #18A0FB transparent #18A0FB transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 /*# sourceMappingURL=index.css.map */

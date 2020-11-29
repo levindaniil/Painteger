@@ -6,12 +6,14 @@ class Card extends React.Component {
 
         cards.forEach(card => {
             if (!card.classList.contains('card_area')) {
-               card.addEventListener('click', () => {
-                if (document.querySelector('.card_checked')) {
-                    document.querySelector('.card_checked').classList.remove('card_checked');
-                }
-                card.classList.toggle('card_checked');
-            });
+                card.addEventListener('click', () => {
+                    let style = card.children[0].style.backgroundImage.slice(4, -1).replace(/['"]/g, "");
+                    this.props.setSelectedStyle([style]);
+                    if (document.querySelector('.card_checked')) {
+                        document.querySelector('.card_checked').classList.remove('card_checked');
+                    }
+                    card.classList.toggle('card_checked');
+                });
             }
         });
     }
@@ -24,8 +26,9 @@ class Card extends React.Component {
                     height: '150px',
                     backgroundImage: `url(${this.props.img})`,
                     backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover'
-                }}> </div>
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center'
+                }}></div>
                 <div className='card__title'>
                     <h3 className='card__title-text'>{this.props.title}</h3>
                 </div>
