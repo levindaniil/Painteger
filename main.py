@@ -81,7 +81,7 @@ api.add_resource(LoadWithSample, "/loadWithSample")
 api.add_resource(LoadWithStyle, "/loadWithStyle")
 
 
-@app.route('/')
+@app.route('https://painteger.herokuapp.com/')
 def serve():
     return send_from_directory(app.static_folder, 'index.html')
 
