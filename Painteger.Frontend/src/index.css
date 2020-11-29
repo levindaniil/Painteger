@@ -483,6 +483,7 @@ template {
   border-radius: 0.429em;
   cursor: pointer;
   text-decoration: none;
+  text-align: center;
 }
 .button_icon {
   width: 2.5em;
