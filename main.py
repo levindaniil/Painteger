@@ -6,7 +6,6 @@ import werkzeug
 from model import Model
 import os
 
-
 app = Flask(__name__
             , static_folder="Painteger.Frontend/build"
             , static_url_path="")
@@ -28,58 +27,56 @@ def favicon():
 class HelloWorld(Resource):
     @cross_origin()
     def get(self):
-        return {"data":"Hello World"}
+        return {"data": "Hello World"}
 
 
-class LoadWithSample(Resource):
-    @cross_origin()
-    def post(self):
-        parse = reqparse.RequestParser()
-        parse.add_argument('image', type=werkzeug.datastructures.FileStorage, location='files')
-        parse.add_argument('style', type=werkzeug.datastructures.FileStorage, location='files')
-        args = parse.parse_args()
+@app.route('/loadWithSample', methods=["POST"])
+def post(self):
+    parse = reqparse.RequestParser()
+    parse.add_argument('image', type=werkzeug.datastructures.FileStorage, location='files')
+    parse.add_argument('style', type=werkzeug.datastructures.FileStorage, location='files')
+    args = parse.parse_args()
 
-        image_file = args['image']
-        image_file.save("content.jpg")
+    image_file = args['image']
+    image_file.save("content.jpg")
 
-        style_file = args['style']
-        style_file.save("style.jpg")
+    style_file = args['style']
+    style_file.save("style.jpg")
 
-        run_model()
+    run_model()
 
-        path = os.path.abspath(os.getcwd())
-        result = '%s/output.jpg' % path
+    path = os.path.abspath(os.getcwd())
+    result = '%s/output.jpg' % path
 
-        response = send_file(result, mimetype='image/jpeg')
-        header = response.headers
-        header['Access-Control-Allow-Credentials'] = 'true'
+    response = send_file(result, mimetype='image/jpeg')
+    header = response.headers
+    header['Access-Control-Allow-Credentials'] = 'true'
 
-        return response
+    return response
 
 
-class LoadWithStyle(Resource):
-    @cross_origin()
-    def post(self):
-        parse = reqparse.RequestParser()
-        parse.add_argument('image', type=werkzeug.datastructures.FileStorage, location='files')
-        parse.add_argument('style', type=str)
-        args = parse.parse_args()
+@app.route('/loadWithStyle', methods=["POST"])
+def post(self):
+    parse = reqparse.RequestParser()
+    parse.add_argument('image', type=werkzeug.datastructures.FileStorage, location='files')
+    parse.add_argument('style', type=str)
+    args = parse.parse_args()
 
-        image_file = args['image']
-        image_file.save("content.jpg")
+    image_file = args['image']
+    image_file.save("content.jpg")
 
-        style = args['style']
+    style = args['style']
 
-        run_model(style)
+    run_model(style)
 
-        path = os.path.abspath(os.getcwd())
-        result = '%s/output.jpg' % path
+    path = os.path.abspath(os.getcwd())
+    result = '%s/output.jpg' % path
 
-        response = send_file(result, mimetype='image/jpeg')
-        header = response.headers
-        header['Access-Control-Allow-Credentials'] = 'true'
+    response = send_file(result, mimetype='image/jpeg')
+    header = response.headers
+    header['Access-Control-Allow-Credentials'] = 'true'
 
-        return response
+    return response
 
 
 def run_model(link=None):
@@ -89,11 +86,6 @@ def run_model(link=None):
 
 
 api.add_resource(HelloWorld, "/hello")
-api.add_resource(LoadWithSample, "/loadWithSample")
-api.add_resource(LoadWithStyle, "/loadWithStyle")
-
 
 if __name__ == "__main__":
     app.run()
-
-
