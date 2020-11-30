@@ -15,9 +15,10 @@ CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
-@app.route('/', methods=["GET"])
+@app.route('', methods=["GET"])
 def index():
-    return app.send_static_file('index.html')
+    return 'Index Page'
+# return app.send_static_file('index.html')
 
 
 @app.route('/favicon.ico', methods=["GET"])
@@ -100,6 +101,6 @@ api.add_resource(LoadWithStyle, "/loadWithStyle")
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0')
 
 
