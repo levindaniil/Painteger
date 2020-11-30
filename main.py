@@ -15,6 +15,16 @@ CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 
+@app.route('/', methods=["GET"])
+def index():
+    return app.send_static_file('index.html')
+
+
+@app.route('/favicon.ico', methods=["GET"])
+def favicon():
+    return app.send_static_file('favicon.ico')
+
+
 class HelloWorld(Resource):
     @cross_origin()
     def get(self):
@@ -81,11 +91,6 @@ def run_model(link=None):
 api.add_resource(HelloWorld, "/hello")
 api.add_resource(LoadWithSample, "/loadWithSample")
 api.add_resource(LoadWithStyle, "/loadWithStyle")
-
-
-@app.route('/')
-def serve():
-    return send_from_directory(app.static_folder, 'index.html')
 
 
 # @app.route('/', defaults={'path': ''})
