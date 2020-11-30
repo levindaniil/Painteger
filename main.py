@@ -31,53 +31,57 @@ class HelloWorld(Resource):
         return {"data": "Hello World"}
 
 
-@app.route('/loadWithSample', methods=["POST"])
-def post(self):
-    parse = reqparse.RequestParser()
-    parse.add_argument('image', type=werkzeug.datastructures.FileStorage, location='files')
-    parse.add_argument('style', type=werkzeug.datastructures.FileStorage, location='files')
-    args = parse.parse_args()
+class LoadWithSample(Resource):
+    @app.route('/loadWithSample', methods=["POST"])
+    @cross_origin()
+    def sample():
+        parse = reqparse.RequestParser()
+        parse.add_argument('image', type=werkzeug.datastructures.FileStorage, location='files')
+        parse.add_argument('style', type=werkzeug.datastructures.FileStorage, location='files')
+        args = parse.parse_args()
 
-    image_file = args['image']
-    image_file.save("content.jpg")
+        image_file = args['image']
+        image_file.save("content.jpg")
 
-    style_file = args['style']
-    style_file.save("style.jpg")
+        style_file = args['style']
+        style_file.save("style.jpg")
 
-    run_model()
+        run_model()
 
-    path = os.path.abspath(os.getcwd())
-    result = '%s/output.jpg' % path
+        path = os.path.abspath(os.getcwd())
+        result = '%s/output.jpg' % path
 
-    response = send_file(result, mimetype='image/jpeg')
-    header = response.headers
-    header['Access-Control-Allow-Credentials'] = 'true'
+        response = send_file(result, mimetype='image/jpeg')
+        header = response.headers
+        header['Access-Control-Allow-Credentials'] = 'true'
 
-    return response
+        return response
 
 
-@app.route('/loadWithStyle', methods=["POST"])
-def post(self):
-    parse = reqparse.RequestParser()
-    parse.add_argument('image', type=werkzeug.datastructures.FileStorage, location='files')
-    parse.add_argument('style', type=str)
-    args = parse.parse_args()
+class LoadWithStyle(Resource):
+    @app.route('/loadWithStyle', methods=["POST"])
+    @cross_origin()
+    def style():
+        parse = reqparse.RequestParser()
+        parse.add_argument('image', type=werkzeug.datastructures.FileStorage, location='files')
+        parse.add_argument('style', type=str)
+        args = parse.parse_args()
 
-    image_file = args['image']
-    image_file.save("content.jpg")
+        image_file = args['image']
+        image_file.save("content.jpg")
 
-    style = args['style']
+        style = args['style']
 
-    run_model(style)
+        run_model(style)
 
-    path = os.path.abspath(os.getcwd())
-    result = '%s/output.jpg' % path
+        path = os.path.abspath(os.getcwd())
+        result = '%s/output.jpg' % path
 
-    response = send_file(result, mimetype='image/jpeg')
-    header = response.headers
-    header['Access-Control-Allow-Credentials'] = 'true'
+        response = send_file(result, mimetype='image/jpeg')
+        header = response.headers
+        header['Access-Control-Allow-Credentials'] = 'true'
 
-    return response
+        return response
 
 
 def run_model(link=None):
@@ -87,6 +91,8 @@ def run_model(link=None):
 
 
 api.add_resource(HelloWorld, "/hello")
+api.add_resource(LoadWithSample, "/loadWithSample")
+api.add_resource(LoadWithStyle, "/loadWithStyle")
 
 if __name__ == "__main__":
     app.run()
