@@ -134,7 +134,7 @@ function Create(props) {
         formData.append('image', selectedFiles[0]);
         formData.append('style', style);
         formData.append('user', 'hubot');
-        fetch(`https://painteger.herokuapp.com//${path}`, {
+        fetch(`https://painteger.herokuapp.com/${path}`, {
             method: 'POST',
             mode: 'cors',
             origin: '*',
