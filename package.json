@@ -2,10 +2,10 @@
   "name": "rmmd",
   "version": "0.0.1",
   "engines": {
-    "node": "6.11.1",
+    "node": "14.11.0",
     "npm": "3.10.10"
   },
   "scripts": {
-    "heroku-postbuild": "cd Painteger.Frontend && npm install -g npm@latest && rm -rf node_modules && npm install && npm run build"
+    "heroku-postbuild": "cd Painteger.Frontend && npm install && npm run build"
   }
 }
