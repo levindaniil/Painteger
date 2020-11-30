@@ -6,7 +6,6 @@
     "npm": "6.x"
   },
   "scripts": {
-    "heroku-prebuild": "npm clean cache —force",
-    "heroku-postbuild": "cd Painteger.Frontend && npm install && npm run build"
+    "heroku-postbuild": "cd Painteger.Frontend && rm -rf node_modules && npm install && npm run build"
   }
 }
