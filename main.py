@@ -3,6 +3,8 @@ from flask import send_file
 from flask_cors import CORS, cross_origin
 from flask_restful import Api, Resource, reqparse
 import werkzeug
+import cv2
+import numpy as np
 from model import Model
 import os
 
@@ -40,13 +42,22 @@ class LoadWithSample(Resource):
         parse.add_argument('style', type=werkzeug.datastructures.FileStorage, location='files')
         args = parse.parse_args()
 
-        image_file = args['image']
-        image_file.save("content.jpg")
+        image_file = args['image'].read()
 
-        style_file = args['style']
-        style_file.save("style.jpg")
+        content_arr = np.fromstring(image_file, dtype = np.uint8)
+        content_image = cv2.imdecode(content_arr, cv2.IMREAD_COLOR)[:,:,::-1] # reverse axis because of keras save
 
-        run_model()
+        style_file = args['style'].read()
+
+        style_arr = np.fromstring(style_file, np.uint8)
+        style_image = cv2.imdecode(style_arr, cv2.IMREAD_COLOR)[:,:,::-1] # reverse axis because of keras save
+
+        # cv2.imwrite("style.jpg", style_image) #saving image using cv2
+
+        # style_file.save("style.jpg")
+        # image_file.save("content.png")
+
+        run_model(content_image,style_image)
 
         path = os.path.abspath(os.getcwd())
         result = '%s/output.jpg' % path
@@ -84,9 +95,9 @@ class LoadWithStyle(Resource):
         return response
 
 
-def run_model(link=None):
+def run_model(content_image, style_image, link=None):
     model = Model()
-    model.run(link)
+    model.run(content_image,style_image,link)
     pass
 
 
