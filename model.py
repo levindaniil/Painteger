@@ -21,6 +21,8 @@ import matplotlib.pylab as plt
 import numpy as np
 import tensorflow as tf
 import tensorflow_hub as hub
+import cv2
+
 
 
 class Model:
@@ -40,7 +42,16 @@ class Model:
         hub_module = hub.load(hub_handle)
         outputs = hub_module(tf.constant(content_image), tf.constant(style_image))
         stylized_image = outputs[0]
-        tf.keras.preprocessing.image.save_img('output.jpg',stylized_image[0])
+        print(stylized_image)
+        print(stylized_image.shape)
+        print("Че передаем",stylized_image[0])
+        # tf.keras.preprocessing.image.save_img('output.jpg',stylized_image[0]) # to base 64 str
+        numpy_array = stylized_image[0].numpy()*255
+        numpy_array = numpy_array[:,:,::-1] # reverse
+        # cv2.imwrite("numpy_image.jpg", numpy_array)
+        success, encoded_image = cv2.imencode('.jpg', numpy_array)
+        stylized_image = encoded_image.tobytes()
+        return stylized_image
 
     def crop_center(self, image):
         shape = image.shape

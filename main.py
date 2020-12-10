@@ -1,13 +1,11 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, make_response
 from flask import send_file
 from flask_cors import CORS, cross_origin
 from flask_restful import Api, Resource, reqparse
 import werkzeug
 import cv2
-import numpy as np
+import base64
 from model import Model
-import os
-
 from pylab import *
 from urllib import request
 from io import BytesIO
@@ -61,15 +59,11 @@ class LoadWithSample(Resource):
         # style_file.save("style.jpg")
         # image_file.save("content.png")
 
-        run_model(content_image,style_image)
+        image_byte = run_model(content_image, style_image)
 
-        path = os.path.abspath(os.getcwd())
-        result = '%s/output.jpg' % path
-
-        response = send_file(result, mimetype='image/jpeg')
-        header = response.headers
-        header['Access-Control-Allow-Credentials'] = 'true'
-
+        response = make_response(image_byte)
+        response.headers.set('Content-Type', 'image/jpeg')
+        response.headers.set('Access-Control-Allow-Credentials', 'true')
         return response
 
 
@@ -92,22 +86,17 @@ class LoadWithStyle(Resource):
         data = BytesIO(request.urlopen(style).read())
         style_image = imread(data, format='jpg')
 
-        run_model(content_image, style_image)
+        image_byte = run_model(content_image, style_image)
 
-        path = os.path.abspath(os.getcwd())
-        result = '%s/output.jpg' % path
-
-        response = send_file(result, mimetype='image/jpeg')
-        header = response.headers
-        header['Access-Control-Allow-Credentials'] = 'true'
-
+        response = make_response(image_byte)
+        response.headers.set('Content-Type', 'image/jpeg')
+        response.headers.set('Access-Control-Allow-Credentials', 'true')
         return response
-
 
 def run_model(content_image, style_image, link=None):
     model = Model()
-    model.run(content_image,style_image,link)
-    pass
+    result = model.run(content_image,style_image,link)
+    return result
 
 
 api.add_resource(HelloWorld, "/hello")
