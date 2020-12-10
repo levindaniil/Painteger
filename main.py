@@ -8,6 +8,10 @@ import numpy as np
 from model import Model
 import os
 
+from pylab import *
+from urllib import request
+from io import BytesIO
+
 app = Flask(__name__
             , static_folder="Painteger.Frontend/build"
             , static_url_path="")
@@ -78,12 +82,17 @@ class LoadWithStyle(Resource):
         parse.add_argument('style', type=str)
         args = parse.parse_args()
 
-        image_file = args['image']
-        image_file.save("content.jpg")
+        image_file = args['image'].read()
+
+        content_arr = np.fromstring(image_file, dtype=np.uint8)
+        content_image = cv2.imdecode(content_arr, cv2.IMREAD_COLOR)[:, :, ::-1]
 
         style = args['style']
 
-        run_model(style)
+        data = BytesIO(request.urlopen(style).read())
+        style_image = imread(data, format='jpg')
+
+        run_model(content_image, style_image)
 
         path = os.path.abspath(os.getcwd())
         result = '%s/output.jpg' % path

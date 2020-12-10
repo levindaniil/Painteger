@@ -16,3 +16,4 @@ tensorflow
 tensorflow_hub
 flask_cors
 gunicorn
+opencv-python
