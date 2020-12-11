@@ -4,7 +4,8 @@ from flask_restful import Api, Resource, reqparse
 import werkzeug
 import cv2
 from model import Model
-from pylab import *
+from pylab import imread
+import numpy as np
 from urllib import request
 from io import BytesIO
 
@@ -90,6 +91,7 @@ class LoadWithStyle(Resource):
         response.headers.set('Content-Type', 'image/jpeg')
         response.headers.set('Access-Control-Allow-Credentials', 'true')
         return response
+
 
 def run_model(content_image, style_image, link=None):
     model = Model()
