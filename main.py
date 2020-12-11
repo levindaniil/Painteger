@@ -1,10 +1,8 @@
-from flask import Flask, send_from_directory, make_response
-from flask import send_file
+from flask import Flask, make_response
 from flask_cors import CORS, cross_origin
 from flask_restful import Api, Resource, reqparse
 import werkzeug
 import cv2
-import base64
 from model import Model
 from pylab import *
 from urllib import request
