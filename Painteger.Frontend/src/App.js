@@ -4,6 +4,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Home from './pages/Home';
 import Create from './pages/Create';
 import Gallery from './pages/Gallery';
+import Error from "./pages/Error";
 import Footer from './components/Footer';
 import Modal from "./components/Modal";
 
@@ -42,6 +43,7 @@ class App extends React.Component {
                         <Route exact path={'/'} component={Home}/>
                         <Route path={'/create-an-art'} component={Create}/>
                         <Route path={'/gallery'} component={Gallery}/>
+                        <Route>{Error}</Route>
                     </Switch>
                 </main>
                 <Footer/>

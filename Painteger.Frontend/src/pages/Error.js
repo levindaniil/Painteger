@@ -1,9 +1,9 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
+import {NavLink} from 'react-router-dom';
 
-function Gallery(props) {
+function Error() {
     return (
-        <div className='container'>
+        <div className='container container_error'>
             <NavLink to='/' className='return-link'>
                 <svg className='return-link__icon' version="1.1" x="0px" y="0px"
                      viewBox="0 0 31.494 31.494">
@@ -13,10 +13,12 @@ function Gallery(props) {
                 </svg>
                 <span className='return-link__text'>Back to home page</span>
             </NavLink>
-            <h1 className='title'>My art</h1>
-            <p className='comment'>A gallery of your art will appear here soon</p>
+            <h1 className='title'>This page doesn't exist</h1>
+            <p className='comment'>You can return to the&nbsp;
+                <NavLink exact to='/' className='link link_error'>home page</NavLink> or&nbsp;
+                <NavLink to='/create-an-art' className='link link_error'>create an art</NavLink></p>
         </div>
     );
 }
 
-export default Gallery;
+export default Error;

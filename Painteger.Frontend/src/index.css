@@ -984,6 +984,7 @@ template {
   align-items: center;
   width: 75%;
   padding: 6.25em;
+  cursor: default;
 }
 .file-status-bar {
   display: flex;
@@ -1260,6 +1261,9 @@ li {
   margin: 2.5em auto;
   max-width: 70%;
 }
+.container_error {
+  text-align: center;
+}
 @media (max-width: 1026px) {
   .container {
     margin: 2em auto;
@@ -1303,5 +1307,12 @@ li {
   100% {
     transform: rotate(360deg);
   }
+}
+.link_error {
+  color: #18A0FB;
+}
+.link_error:hover,
+.link_error:focus {
+  color: #000000;
 }
 /*# sourceMappingURL=index.css.map */

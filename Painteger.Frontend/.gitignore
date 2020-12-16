@@ -8,6 +8,9 @@
 
 # testing
 /coverage
+./src/App.test.js
+./src/pages/Create.test.js
+./src/test-utils.js
 
 # production
 /build

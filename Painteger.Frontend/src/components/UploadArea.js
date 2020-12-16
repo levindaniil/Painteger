@@ -24,7 +24,7 @@ function UploadArea(props) {
             </div>
             {
                 props.selectedFiles.map((data, i) =>
-                    <div className="file-status-bar" key={i}>
+                    <div className="file-status-bar" data-testid='picture' key={i}>
                         <div className="file-info">
                             <span className={`file-name ${data.invalid ? 'file-error' : ''}`}>{data.name}</span>
                         <span className="file-size">({props.fileSize(data.size)})</span>
