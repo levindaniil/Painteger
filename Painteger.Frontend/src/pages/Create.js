@@ -148,6 +148,7 @@ function Create(props) {
                 const img = new Image();
                 img.classList.add('result-img');
                 img.src = imageUrl;
+                img.alt = 'stylized picture';
                 download.href = imageUrl;
                 result.style.background = 'none';
                 result.style.border = 'none';

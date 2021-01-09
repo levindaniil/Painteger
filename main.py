@@ -19,8 +19,14 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/', methods=["GET"])
 @app.route('/create-an-art', methods=["GET"])
+@app.route('/gallery', methods=["GET"])
 def index():
     return app.send_static_file('index.html')
+
+
+@app.errorhandler(404)
+def not_found(e):
+    return app.send_static_file("index.html")
 
 
 @app.route('/favicon.ico', methods=["GET"])

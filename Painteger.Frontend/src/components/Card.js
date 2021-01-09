@@ -7,7 +7,7 @@ class Card extends React.Component {
         cards.forEach(card => {
             if (!card.classList.contains('card_area')) {
                 card.addEventListener('click', () => {
-                    let style = card.children[0].style.backgroundImage.slice(4, -1).replace(/['"]/g, "");
+                    let style = card.children[0].src;
                     this.props.setSelectedStyle([style]);
                     if (document.querySelector('.card_checked')) {
                         document.querySelector('.card_checked').classList.remove('card_checked');
@@ -21,14 +21,12 @@ class Card extends React.Component {
     render() {
         return (
             <div className='card'>
-                <div className='card__img' style={{
+                <img className='card__img' src={this.props.img} alt={this.props.alt}
+                     style={{
                     width: '100%',
                     height: '150px',
-                    backgroundImage: `url(${this.props.img})`,
-                    backgroundRepeat: 'no-repeat',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                }}></div>
+                    objectPosition: 'center'
+                }}/>
                 <div className='card__title'>
                     <h3 className='card__title-text'>{this.props.title}</h3>
                 </div>

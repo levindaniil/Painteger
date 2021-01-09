@@ -20,7 +20,7 @@ function Cards(props) {
             </div>
             {
                 props.selectedStyle.map((data, i) => (typeof data !== 'string') ?
-                    <div className="file-status-bar" key={i}>
+                    <div className="file-status-bar" data-testid='style' key={i}>
                         <span className={`file-name ${data.invalid ? 'file-error' : ''}`}>{data.name}</span>
                         <span className="file-size">({props.fileSize(data.size)})</span>
                         {data.invalid && <span className='file-error-message'>({props.errorMessage})</span>}
